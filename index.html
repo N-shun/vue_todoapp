@@ -1,0 +1,33 @@
+<!DOCTYPE html> <!--html宣言 -->
+<html lang="ja"><!--日本語の宣言 -->
+<head>
+  <meta charset="UTF-8"><!--文字コードの宣言 -->
+  <title>My Vue App</title><!--ページタイトルの定義 -->
+  <link rel="stylesheet" href="css/styles.css"><!--cssファイルの読み込み -->
+</head>
+<body>
+
+  <div id="app" class="container"><!--divにappというid名をつけ、containerというclassを定義 -->
+    <h1><!--h1内に下記の内容を作成 -->
+      <button @click="purge">Purge</button><!--purgeというボタンを作成 -->
+      My Todos<!--My Todosという文字列の表記-->
+      <span class="info">({{ remaining.length }}/{{ todos.length }})</span><!--全体のtodosに対して残りの数がわかるような表記に。 -->
+    </h1>
+    <ul><!-- リストの作成-->
+      <li v-for="(todo, index) in todos"><!-- 配列をループさせる。todoをtodosの中に入れる-->
+        <input type="checkbox" v-model="todo.isDone">
+        <span :class="{done: todo.isDone}">{{ todo.title }}</span>
+        <span @click="deleteItem(index)" class="command">[x]</span>
+      </li>
+      <li v-show="!todos.length">Nothing to do, yay!</li>
+    </ul>
+    <form @submit.prevent="addItem">
+      <input type="text" v-model="newItem">
+      <input type="submit" value="Add">
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
